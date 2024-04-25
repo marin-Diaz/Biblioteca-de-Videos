@@ -43,5 +43,35 @@ public class CultureMediaServiceTestImpl {
             cultureMediaService.findAll();
         });
     }
+    @Test
+    void when_FindByTittle_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() throws VideoNotFoundException{
+        assertThrows(VideoNotFoundException.class, () -> {
+            cultureMediaService.find("Movie");
+        });
+    }
+
+    @Test
+    void when_FindByTittle_videos_should_be_returned_successfully() throws VideoNotFoundException {
+        var video = new Video("01","Duna","Pelicula",3.5);
+        cultureMediaService.save( video );
+        List<Video> videos = cultureMediaService.find("Duna");
+        assertEquals(1, videos.size());
+    }
+
+    @Test
+    void when_FindByDuration_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() throws VideoNotFoundException{
+        assertThrows(VideoNotFoundException.class, () -> {
+            cultureMediaService.find(1.5,2.0);
+        });
+    }
+
+    @Test
+    void when_FindByDuration_videos_should_be_returned_successfully() throws VideoNotFoundException {
+        var video = new Video("01","Duna","Pelicula",3.5);
+        cultureMediaService.save( video );
+        List<Video> videos = cultureMediaService.find(2.5,3.5);
+        assertEquals(1, videos.size());
+    }
+
 
 }
