@@ -13,7 +13,7 @@ public class ViewsRepositoryImpl implements ViewsRepository {
         this.views = new ArrayList<>();
     }
     @Override
-    public View addView(View view) {
+    public View save (View view) {
         return null;
     }
 }
